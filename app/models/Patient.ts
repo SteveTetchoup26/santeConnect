@@ -41,7 +41,6 @@ const PatientSchema: Schema = new Schema(
   }
 );
 
-// Index pour améliorer les performances de recherche
 PatientSchema.index({ email: 1 });
 PatientSchema.index({ phone: 1 });
 PatientSchema.index({ name: 'text' });

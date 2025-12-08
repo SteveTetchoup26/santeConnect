@@ -15,7 +15,7 @@ export class ResponseHandler {
     return this.success(res, data, message, 201);
   }
 
-  static error(res: Response, message: string = 'Une erreur est survenue', statusCode: number = 500, error?: string): Response {
+  static error(res: Response, message: string = 'Une erreur est survenue', statusCode: number = 500, error?: string | Record<string,string>): Response {
     const response: ApiResponse<null> = {
       success: false,
       message,
@@ -24,7 +24,7 @@ export class ResponseHandler {
     return res.status(statusCode).json(response);
   }
 
-  static badRequest(res: Response, message: string = 'Requête invalide', error?: string): Response {
+  static badRequest(res: Response, message: string = 'Requête invalide', error?: any): Response {
     return this.error(res, message, 400, error);
   }
 

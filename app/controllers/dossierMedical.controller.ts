@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import DossierMedical from '../models/DossierMedical';
 import Patient from '../models/Patient';
-import { ResponseHandler } from '../utils/responseHandler';
+import { ResponseHandler } from '../middlewares/responseHandler';
 
 export class DossierMedicalController {
   // Créer un nouveau dossier médical

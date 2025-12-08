@@ -1,6 +1,5 @@
 import { Document } from 'mongoose';
 
-// Interface pour les Patients
 export interface IPatient extends Document {
   name: string;
   email: string;
@@ -10,14 +9,12 @@ export interface IPatient extends Document {
   updatedAt?: Date;
 }
 
-// Interface pour les Médicaments
 export interface IMedication {
   name: string;
   dose: string;
   frequency: string;
 }
 
-// Interface pour les Signes Vitaux
 export interface IVitalSigns {
   bloodPressure?: string;
   heartRate?: number;
@@ -27,7 +24,6 @@ export interface IVitalSigns {
   height?: number;
 }
 
-// Interface pour les Dossiers Médicaux
 export interface IDossierMedical extends Document {
   patientId: string;
   allergies: string[];
@@ -44,12 +40,11 @@ export interface IDossierMedical extends Document {
   updatedAt?: Date;
 }
 
-// Types pour les réponses API
 export interface ApiResponse<T> {
   success: boolean;
   message: string;
   data?: T;
-  error?: string;
+  error?: string | Record<string, string>;
 }
 
 export interface PaginationParams {

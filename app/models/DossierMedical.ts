@@ -106,7 +106,6 @@ const DossierMedicalSchema: Schema = new Schema(
   }
 );
 
-// Index pour les recherches fréquentes
 DossierMedicalSchema.index({ patientId: 1, createdAt: -1 });
 
 // Méthode pour obtenir le dernier dossier d'un patient

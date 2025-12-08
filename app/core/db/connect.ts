@@ -37,12 +37,3 @@ export const connectDB = async (): Promise<void> => {
     process.exit(1);
   }
 };
-
-export const disconnectDB = async (): Promise<void> => {
-  try {
-    await mongoose.connection.close();
-    console.log('Connexion MongoDB fermée');
-  } catch (error) {
-    console.error('Erreur lors de la fermeture:', error);
-  }
-};
