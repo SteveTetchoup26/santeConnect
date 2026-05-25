@@ -4,12 +4,10 @@ import Patient from '../models/Patient';
 import { ResponseHandler } from '../middlewares/responseHandler';
 
 export class DossierMedicalController {
-  // Créer un nouveau dossier médical
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { patientId, allergies, medications, vitalSigns, diagnoses, labResults, notes } = req.body;
 
-      // Vérifier que le patient existe
       const patient = await Patient.findById(patientId);
       if (!patient) {
         return ResponseHandler.notFound(res, 'Patient non trouvé');
@@ -34,7 +32,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Obtenir tous les dossiers médicaux avec pagination
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const page = parseInt(req.query.page as string) || 1;
@@ -66,7 +63,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Obtenir un dossier par ID
   static async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -84,12 +80,10 @@ export class DossierMedicalController {
     }
   }
 
-  // Obtenir tous les dossiers d'un patient
   static async getByPatient(req: Request, res: Response, next: NextFunction) {
     try {
       const { patientId } = req.params;
 
-      // Vérifier que le patient existe
       const patient = await Patient.findById(patientId);
       if (!patient) {
         return ResponseHandler.notFound(res, 'Patient non trouvé');
@@ -128,7 +122,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Mettre à jour un dossier médical
   static async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -153,7 +146,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Ajouter un médicament
   static async addMedication(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -175,7 +167,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Ajouter un résultat de laboratoire
   static async addLabResult(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -197,7 +188,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Supprimer un dossier médical
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -218,7 +208,6 @@ export class DossierMedicalController {
     }
   }
 
-  // Obtenir les statistiques
   static async getStats(req: Request, res: Response, next: NextFunction) {
     try {
       const total = await DossierMedical.countDocuments();

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Service de la base de données MongoDB
+  db:
+    image: mongo:6.0-jammy
+    container_name: santeconnect-db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - santeconnect-network
+
+  # Service de l'API Node.js (Express/TypeScript)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: santeconnect-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://db:27017/santeconnect
+      - CORS_ORIGIN=*
+    depends_on:
+      - db
+    networks:
+      - santeconnect-network
+
+# Réseau virtuel interne pour faire communiquer l'API et la base de données
+networks:
+  santeconnect-network:
+    driver: bridge
+
+# Volume persistant pour s'assurer que les données MongoDB ne soient pas perdues
+volumes:
+  mongo_data:
+    driver: local

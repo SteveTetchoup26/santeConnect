@@ -108,18 +108,5 @@ const DossierMedicalSchema: Schema = new Schema(
 
 DossierMedicalSchema.index({ patientId: 1, createdAt: -1 });
 
-// Méthode pour obtenir le dernier dossier d'un patient
-DossierMedicalSchema.statics.getLatestByPatient = async function(patientId: string) {
-  return this.findOne({ patientId })
-    .sort({ createdAt: -1 })
-    .populate('patientId', 'name email phone');
-};
-
-// Méthode pour obtenir l'historique complet d'un patient
-DossierMedicalSchema.statics.getHistoryByPatient = async function(patientId: string) {
-  return this.find({ patientId })
-    .sort({ createdAt: -1 })
-    .populate('patientId', 'name email phone');
-};
 
 export default mongoose.model<IDossierMedical>('DossierMedical', DossierMedicalSchema);

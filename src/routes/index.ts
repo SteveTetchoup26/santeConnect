@@ -4,21 +4,10 @@ import dossierMedicalRoutes from './dossierMedical.route';
 
 const router = Router();
 
-// Route de santé de l'API
-router.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    message: 'API SantéConnect en ligne',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  });
-});
 
-// Routes principales
 router.use('/patients', patientRoutes);
 router.use('/dossiers', dossierMedicalRoutes);
 
-// Route d'accueil
 router.get('/', (req, res) => {
   res.json({
     success: true,
@@ -27,9 +16,7 @@ router.get('/', (req, res) => {
     endpoints: {
       patients: '/api/patients',
       dossiers: '/api/dossiers',
-      health: '/api/health'
-    },
-    documentation: 'Consultez le README pour plus d\'informations'
+    }
   });
 });
 

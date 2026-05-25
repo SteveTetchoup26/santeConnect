@@ -4,7 +4,6 @@ import DossierMedical from '../models/DossierMedical';
 import { ResponseHandler } from '../middlewares/responseHandler';
 
 export class PatientController {
-  // Créer un nouveau patient
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, email, phone, dateOfBirth } = req.body;
@@ -22,7 +21,6 @@ export class PatientController {
     }
   }
 
-  // Obtenir tous les patients avec pagination
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const page = parseInt(req.query.page as string) || 1;
@@ -50,7 +48,6 @@ export class PatientController {
     }
   }
 
-  // Obtenir un patient par ID
   static async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -66,7 +63,6 @@ export class PatientController {
     }
   }
 
-  // Rechercher des patients
   static async search(req: Request, res: Response, next: NextFunction) {
     try {
       const { query } = req.query;
@@ -89,7 +85,6 @@ export class PatientController {
     }
   }
 
-  // Mettre à jour un patient
   static async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -111,7 +106,6 @@ export class PatientController {
     }
   }
 
-  // Supprimer un patient
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -122,7 +116,6 @@ export class PatientController {
         return ResponseHandler.notFound(res, 'Patient non trouvé');
       }
 
-      // Supprimer aussi tous les dossiers médicaux associés
       await DossierMedical.deleteMany({ patientId: id });
 
       return ResponseHandler.success(
@@ -135,7 +128,6 @@ export class PatientController {
     }
   }
 
-  // Obtenir les statistiques
   static async getStats(req: Request, res: Response, next: NextFunction) {
     try {
       const total = await Patient.countDocuments();

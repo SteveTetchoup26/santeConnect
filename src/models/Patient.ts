@@ -45,22 +45,5 @@ PatientSchema.index({ email: 1 });
 PatientSchema.index({ phone: 1 });
 PatientSchema.index({ name: 'text' });
 
-// Méthode virtuelle pour calculer l'âge
-PatientSchema.virtual('age').get(function(this: IPatient) {
-  const today = new Date();
-  const birthDate = new Date(this.dateOfBirth);
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  
-  return age;
-});
-
-// Configuration pour inclure les virtuels dans JSON
-PatientSchema.set('toJSON', { virtuals: true });
-PatientSchema.set('toObject', { virtuals: true });
 
 export default mongoose.model<IPatient>('Patient', PatientSchema);
