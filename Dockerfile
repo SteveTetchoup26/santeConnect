@@ -26,8 +26,8 @@ RUN npm prune --production
 FROM node:20-alpine
 
 # Configuration de l'environnement de production
-ENV NODE_ENV=production
-PORT=3000
+ENV NODE_ENV=production \
+    PORT=3000
 
 WORKDIR /app
 
