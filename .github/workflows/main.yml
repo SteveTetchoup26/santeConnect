@@ -71,18 +71,18 @@ jobs:
           name: coverage-report
           path: coverage
 
-      - name: Exécuter l'analyse de code SonarQube
+      - name: Exécuter l'analyse de code SonarCloud
         uses: sonarsource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: Attente du résultat de la Porte de Qualité (Quality Gate)
         uses: sonarsource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
   # ==========================================
   # Étape 3 : Construction et publication de l'image sur Docker Hub
