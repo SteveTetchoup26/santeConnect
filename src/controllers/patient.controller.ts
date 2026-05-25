@@ -21,6 +21,7 @@ export class PatientController {
     }
   }
 
+  // liste des patients avec pagination
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const page = parseInt(req.query.page as string) || 1;
